@@ -11,20 +11,20 @@ from .utils import Calendar
 
 class CalendarView(generic.ListView):
     model = Event
-    template_name = 'cal/calendar.html'
+    template_name = 'Kal/calendar.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # dzisiejsza data do kalendarza 
+        # dzisiejsza data 
         d = get_date(self.request.GET.get('day', None))
 
-        # tworzymy instancje klasy Calendar z dzisiejsza data
+        # instancja klasy Calendar
         Kal = Calendar(d.year, d.month)
 
-        # zwracamy kalendzarz jako tabele
+        # zwracamy kalendarz jako tabele
         html_Kal = Kal.formatmonth(withyear=True)
-        context['calendar'] = mark_safe(html_Kal)
+        context['calendar'] = mark_safe(html_cal)
         return context
 
 def get_date(req_day):
